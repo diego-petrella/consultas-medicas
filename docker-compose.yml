@@ -1,0 +1,45 @@
+version: '3.8'
+services:
+  app:
+    image: php:8.2-apache
+    container_name: consultas_app
+    ports:
+      - "8082:80"
+    volumes:
+      - ./backend:/var/www/html
+    depends_on:
+      - db
+    working_dir: /var/www/html
+    command: >
+      bash -c "
+      apt-get update &&
+      apt-get install -y libicu-dev &&
+      docker-php-ext-install mysqli pdo pdo_mysql intl &&
+      a2enmod rewrite &&
+      apache2-foreground
+      "
+  db:
+    image: mysql:8.0-debian
+    container_name: consultas_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: consultas_medicas
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: consultas_phpmyadmin
+    ports:
+      - "8083:80"
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root123
+    depends_on:
+      - db
+
+volumes:
+  db_data:
