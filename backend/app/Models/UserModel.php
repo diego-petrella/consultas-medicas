@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Entities\User\User;
-use App\Entities\User\PrimitiveToUserConverter;
+use App\Entity\User\User;
+use App\Converter\User\PrimitiveToUserConverter;
 use CodeIgniter\Database\BaseConnection;
 use Config\Database;
 

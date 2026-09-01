@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Entities\User;
+namespace App\Converter\User;
+
+use App\Entity\User\User;
 
 final class PrimitiveToUserConverter
 {

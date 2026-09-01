@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities\Visita;
+namespace App\Entity\Visita;
 
 final class Visita
 {

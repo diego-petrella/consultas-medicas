@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities\ObraSocial;
+namespace App\Entity\ObraSocial;
 
 final class ObraSocial
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entities\Paciente;
+namespace App\Entity\Paciente;
 
 final class Paciente
 {

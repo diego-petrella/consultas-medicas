@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Entities\Doctor;
+namespace App\Entity\Doctor;
 
 
 final class Doctor {
