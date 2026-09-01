@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity\HistoriasClinicas;
+namespace App\Entities\HistoriaClinica;
 
 
 final class HistoriaClinica {
