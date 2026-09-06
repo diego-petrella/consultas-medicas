@@ -8,6 +8,6 @@ final class HistoriaClinicaNotFoundException extends Exception
 {
     public function __construct(int $id)
     {
-        parent::__construct("Historia clinica with id {$id} not found", 404);
+        parent::__construct("Historia clinica con ID {$id} no encontrada", 404);
     }
 }
