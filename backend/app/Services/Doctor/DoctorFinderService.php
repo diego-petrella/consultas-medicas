@@ -2,6 +2,7 @@
 
 namespace App\Services\Doctor;
 
+use App\Entity\Doctor\Doctor;
 use App\Exception\Doctor\DoctorNotFoundException;
 use App\Models\DoctorModel;
 
@@ -14,9 +15,9 @@ final class DoctorFinderService
         $this->doctorModel = new DoctorModel();
     }
 
-    public function buscarPorId(int $id): array
+    public function find(int $id): Doctor
     {
-        $doctor = $this->doctorModel->obtenerConUsuario($id);
+        $doctor = $this->doctorModel->find($id);
 
         if ($doctor === null) {
             throw new DoctorNotFoundException($id);

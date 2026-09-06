@@ -9,9 +9,10 @@ final class Doctor {
         private ?int $id,
         private int $user_id,
         private string $matricula,
-        private string $especialidad,
-        private string $telefono,
-        private string $created_at
+        private ?string $especialidad,
+        private ?string $telefono,
+        private int $activo,
+        private ?string $created_at
     )
     {}
 
@@ -32,17 +33,22 @@ final class Doctor {
         return $this->matricula;
     }
 
-    public function getEspecialidad(): string
+    public function getEspecialidad(): ?string
     {
         return $this->especialidad;
     }
 
-    public function getTelefono(): string
+    public function getTelefono(): ?string
     {
         return $this->telefono;
     }
 
-     public function getCreatedAt(): string
+    public function getActivo(): int
+    {
+        return $this->activo;
+    }
+
+     public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }

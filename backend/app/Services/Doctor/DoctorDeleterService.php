@@ -2,24 +2,22 @@
 
 namespace App\Services\Doctor;
 
-use App\Exception\Doctor\DoctorNotFoundException;
 use App\Models\DoctorModel;
 
 final class DoctorDeleterService
 {
     private DoctorModel $doctorModel;
+    private DoctorFinderService $doctorFinderService;
 
     public function __construct()
     {
-        $this->doctorModel = new DoctorModel();
+        $this->doctorModel         = new DoctorModel();
+        $this->doctorFinderService = new DoctorFinderService();
     }
 
     public function eliminar(int $id): void
     {
-        if ($this->doctorModel->find($id) === null) {
-            throw new DoctorNotFoundException($id);
-        }
-
-        $this->doctorModel->update($id, ['activo' => 0]);
+        $doctor = $this->doctorFinderService->find($id);
+        $this->doctorModel->delete($doctor->getId());
     }
 }
