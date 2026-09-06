@@ -31,6 +31,19 @@ final class RoleModel
         return $this->converter->convert($primitive);
     }
 
+    public function listarTodos(): array
+    {
+        $result     = $this->db->query('SELECT * FROM roles ORDER BY nombre ASC');
+        $primitives = $result->getResult();
+
+        $entities = [];
+        foreach ($primitives as $primitive) {
+            $entities[] = $this->converter->convert($primitive);
+        }
+
+        return $entities;
+    }
+
     public function search(RoleFilterRequest $request): array
     {
         $parameters = [];
