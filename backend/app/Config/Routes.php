@@ -26,3 +26,10 @@ $routes->get('historias-clinicas/(:num)/pdf', 'HistoriaClinica\HistoriaClinicaPd
 //Rutas para roles (solo lectura -- son constantes del sistema, no se crean/editan por API)
 $routes->get('roles', 'Role\RolesGetController::search');
 $routes->get('roles/(:num)', 'Role\RoleGetController::find/$1');
+
+//Rutas para pacientes
+//'buscar' va antes de las rutas con (:num) para que CodeIgniter no la confunda con un id numerico
+$routes->get('pacientes/buscar', 'Paciente\PacienteBuscarController::buscar');
+$routes->get('pacientes/(:num)/historial', 'Paciente\PacienteHistorialController::historial/$1');
+$routes->post('pacientes', 'Paciente\PacientePostController::create');
+$routes->put('pacientes/(:num)', 'Paciente\PacientePutController::put/$1');
