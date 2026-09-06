@@ -2,6 +2,8 @@
 
 namespace App\Services\User;
 
+use App\Entity\User\User;
+use App\Exception\User\UserNotFoundException;
 use App\Models\UserModel;
 use Config\Database;
 use Exception;
@@ -46,5 +48,16 @@ final class UserFinderService
             'role_id'    => $user->getRoleId(),
             'rol_nombre' => $rol->nombre,
         ];
+    }
+
+    public function buscarPorId(int $id): User
+    {
+        $user = $this->userModel->find($id);
+
+        if ($user === null) {
+            throw new UserNotFoundException($id);
+        }
+
+        return $user;
     }
 }
