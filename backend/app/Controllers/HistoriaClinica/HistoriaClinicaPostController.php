@@ -17,6 +17,12 @@ class HistoriaClinicaPostController extends BaseController
             ]);
         }
 
+        if (! empty($data['visita_id']) && ! is_numeric($data['visita_id'])) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'error' => 'visita_id debe ser numerico',
+            ]);
+        }
+
         $usuario = session()->get('usuario');
 
         $service = new HistoriaClinicaCreatorService();

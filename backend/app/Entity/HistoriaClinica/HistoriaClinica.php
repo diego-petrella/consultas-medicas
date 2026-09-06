@@ -8,6 +8,7 @@ final class HistoriaClinica {
         private ?int $id,
         private int $paciente_id,
         private int $doctor_id,
+        private ?int $visita_id,
         private string $fecha,
         private string $diagnostico,
         private string $tratamiento,
@@ -28,6 +29,11 @@ final class HistoriaClinica {
       public function getDoctorId() : int
     {
         return $this->doctor_id;
+    }
+
+    public function getVisitaId() : ?int
+    {
+        return $this->visita_id;
     }
 
     public function getFecha(): string
