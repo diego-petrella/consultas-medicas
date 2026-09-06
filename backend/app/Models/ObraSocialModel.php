@@ -58,6 +58,19 @@ final class ObraSocialModel
         return $entities;
     }
 
+    public function listarActivas(): array
+    {
+        $result     = $this->db->query('SELECT * FROM obras_sociales ORDER BY nombre ASC');
+        $primitives = $result->getResult();
+
+        $entities = [];
+        foreach ($primitives as $primitive) {
+            $entities[] = $this->converter->convert($primitive);
+        }
+
+        return $entities;
+    }
+
     public function insert(ObraSocial $obraSocial): ObraSocial
     {
         $this->db->query(
