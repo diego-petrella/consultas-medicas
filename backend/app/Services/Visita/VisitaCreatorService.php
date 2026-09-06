@@ -2,6 +2,7 @@
 
 namespace App\Services\Visita;
 
+use App\Entity\Visita\Visita;
 use App\Models\PacienteModel;
 use App\Models\VisitaModel;
 use Config\Database;
@@ -42,13 +43,16 @@ final class VisitaCreatorService
             ]);
         }
 
-        $visitaId = $this->visitaModel->insert([
-            'fecha'          => $data['fecha'],
-            'paciente_id'    => $pacienteId,
-            'doctor_id'      => $data['doctor_id'],
-            'obra_social_id' => $data['obra_social_id'] ?? null,
-            'estado'         => 1,
-        ]);
+        $visita = new Visita(
+            id: null,
+            fecha: $data['fecha'],
+            pacienteId: (int) $pacienteId,
+            doctorId: (int) $data['doctor_id'],
+            obraSocialId: isset($data['obra_social_id']) ? (int) $data['obra_social_id'] : null,
+            estado: 1,
+        );
+
+        $nuevaVisita = $this->visitaModel->insert($visita);
 
         $db->transComplete();
 
@@ -56,6 +60,6 @@ final class VisitaCreatorService
             throw new Exception('No se pudo crear la visita.');
         }
 
-        return (int) $visitaId;
+        return $nuevaVisita->getId();
     }
 }
