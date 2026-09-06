@@ -12,7 +12,7 @@ class HistoriaClinicaModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['paciente_id', 'doctor_id', 'fecha', 'diagnostico', 'tratamiento', 'observaciones'];
+    protected $allowedFields    = ['paciente_id', 'doctor_id', 'visita_id', 'fecha', 'diagnostico', 'tratamiento', 'observaciones'];
 
     public function obtenerPorPaciente(int $pacienteId): array
     {

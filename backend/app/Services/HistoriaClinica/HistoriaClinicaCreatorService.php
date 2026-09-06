@@ -28,6 +28,7 @@ final class HistoriaClinicaCreatorService
         $id = $this->historiaClinicaModel->insert([
             'paciente_id'   => $data['paciente_id'],
             'doctor_id'     => $doctor['id'],
+            'visita_id'     => $data['visita_id'] ?? null,
             'fecha'         => date('Y-m-d H:i:s'),
             'diagnostico'   => $data['diagnostico'],
             'tratamiento'   => $data['tratamiento'],
