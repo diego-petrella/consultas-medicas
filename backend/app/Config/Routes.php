@@ -14,3 +14,7 @@ $routes->delete('obras-sociales/(:num)', 'ObraSocial\ObraSocialDeleteController:
 //Rutas para user
 $routes->post('login', 'User\UserPostController::login');
 $routes->post('logout', 'User\UserLogoutController::logout');
+
+//Rutas para historias clinicas
+$routes->post('historias-clinicas', 'HistoriaClinica\HistoriaClinicaPostController::create');
+$routes->get('historias-clinicas/(:num)/pdf', 'HistoriaClinica\HistoriaClinicaPdfController::pdf/$1');
