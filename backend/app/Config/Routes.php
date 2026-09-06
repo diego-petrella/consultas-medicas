@@ -33,3 +33,10 @@ $routes->get('pacientes/buscar', 'Paciente\PacienteBuscarController::buscar');
 $routes->get('pacientes/(:num)/historial', 'Paciente\PacienteHistorialController::historial/$1');
 $routes->post('pacientes', 'Paciente\PacientePostController::create');
 $routes->put('pacientes/(:num)', 'Paciente\PacientePutController::put/$1');
+
+//Rutas para visitas
+$routes->get('visitas', 'Visita\VisitaGetController::search');
+$routes->get('visitas/(:num)', 'Visita\VisitaShowController::show/$1');
+$routes->post('visitas', 'Visita\VisitaPostController::create');
+$routes->put('visitas/(:num)', 'Visita\VisitaPutController::put/$1');
+$routes->delete('visitas/(:num)', 'Visita\VisitaDeleteController::delete/$1');
