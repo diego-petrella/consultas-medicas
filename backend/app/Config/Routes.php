@@ -9,6 +9,8 @@ $routes->options('(:any)', static function () {
     return service('response')->setStatusCode(204);
 });
 
+//'activas' va antes que la ruta general para no chocar con futuros filtros por (:num)
+$routes->get('obras-sociales/activas', 'ObraSocial\ObraSocialActivasController::activas');
 $routes->get('obras-sociales', 'ObraSocial\ObraSocialesGetController::search');
 $routes->get('obras-sociales/(:num)', 'ObraSocial\ObraSocialGetController::find/$1');
 $routes->post('obras-sociales', 'ObraSocial\ObraSocialPostController::create');
