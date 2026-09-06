@@ -40,3 +40,11 @@ $routes->get('visitas/(:num)', 'Visita\VisitaShowController::show/$1');
 $routes->post('visitas', 'Visita\VisitaPostController::create');
 $routes->put('visitas/(:num)', 'Visita\VisitaPutController::put/$1');
 $routes->delete('visitas/(:num)', 'Visita\VisitaDeleteController::delete/$1');
+
+//Rutas para doctores
+//'activos' va antes que la ruta general para no chocar con futuros filtros por (:num)
+$routes->get('doctores/activos', 'Doctor\DoctorActivosController::activos');
+$routes->get('doctores', 'Doctor\DoctorGetController::index');
+$routes->post('doctores', 'Doctor\DoctorPostController::create');
+$routes->put('doctores/(:num)', 'Doctor\DoctorPutController::put/$1');
+$routes->delete('doctores/(:num)', 'Doctor\DoctorDeleteController::delete/$1');
