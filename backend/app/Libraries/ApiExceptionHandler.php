@@ -29,10 +29,34 @@ final class ApiExceptionHandler extends BaseExceptionHandler implements Exceptio
                 $httpCode
             );
             header('Content-Type: application/json; charset=UTF-8');
+            $this->sendCorsHeaders($request);
         }
 
         echo json_encode(['error' => $message]);
 
         exit($exitCode);
+    }
+
+    /**
+     * El pipeline normal de filtros de CodeIgniter (incluido el filtro 'cors')
+     * no llega a correr porque este handler corta la ejecucion con exit().
+     * Sin esto, cualquier error del backend queda sin headers CORS y el
+     * navegador lo bloquea como "Failed to fetch" aunque el servidor
+     * haya respondido correctamente.
+     */
+    private function sendCorsHeaders(RequestInterface $request): void
+    {
+        $origin = $request->getHeaderLine('Origin');
+        $cors   = config('Cors')->default;
+
+        if ($origin === '' || ! in_array($origin, $cors['allowedOrigins'], true)) {
+            return;
+        }
+
+        header('Access-Control-Allow-Origin: ' . $origin);
+
+        if ($cors['supportsCredentials']) {
+            header('Access-Control-Allow-Credentials: true');
+        }
     }
 }
