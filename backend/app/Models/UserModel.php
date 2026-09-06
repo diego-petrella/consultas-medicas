@@ -33,4 +33,16 @@ final class UserModel
 
         return $this->converter->convert($primitive);
     }
+
+    public function insert(array $data): int
+    {
+        $this->database->table('users')->insert($data);
+
+        return (int) $this->database->insertID();
+    }
+
+    public function update(int $id, array $data): void
+    {
+        $this->database->table('users')->where('id', $id)->update($data);
+    }
 }
