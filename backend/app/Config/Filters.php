@@ -70,13 +70,18 @@ class Filters extends BaseFilters
      *     after: array<string, array{except: list<string>|string}>|list<string>
      * }
      */
-   public array $globals = [
-    'before' => [
-        'cors',
-    ],
-    'after' => [
-    ],
-];
+    public array $globals = [
+        'before' => [
+            'cors',
+            // 'honeypot',
+            // 'csrf',
+            // 'invalidchars',
+        ],
+        'after' => [
+            // 'honeypot',
+            // 'secureheaders',
+        ],
+    ];
 
     /**
      * List of filter aliases that works on a
