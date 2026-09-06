@@ -2,28 +2,33 @@
 
 namespace App\Services\Visita;
 
-use App\Exception\Visita\VisitaNotFoundException;
+use App\Entity\Visita\Visita;
 use App\Models\VisitaModel;
 
 final class VisitaUpdaterService
 {
     private VisitaModel $visitaModel;
+    private VisitaFinderService $visitaFinderService;
 
     public function __construct()
     {
-        $this->visitaModel = new VisitaModel();
+        $this->visitaModel         = new VisitaModel();
+        $this->visitaFinderService = new VisitaFinderService();
     }
 
     public function actualizar(int $id, array $datos): void
     {
-        if ($this->visitaModel->find($id) === null) {
-            throw new VisitaNotFoundException($id);
-        }
+        $visita = $this->visitaFinderService->find($id);
 
-        $this->visitaModel->update($id, [
-            'doctor_id'      => $datos['doctor_id'],
-            'obra_social_id' => $datos['obra_social_id'] ?? null,
-            'fecha'          => $datos['fecha'],
-        ]);
+        $actualizada = new Visita(
+            id: $visita->getId(),
+            fecha: $datos['fecha'],
+            pacienteId: $visita->getPacienteId(),
+            doctorId: (int) $datos['doctor_id'],
+            obraSocialId: isset($datos['obra_social_id']) ? (int) $datos['obra_social_id'] : null,
+            estado: $visita->getEstado(),
+        );
+
+        $this->visitaModel->update($actualizada);
     }
 }

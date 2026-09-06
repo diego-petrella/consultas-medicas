@@ -2,24 +2,22 @@
 
 namespace App\Services\Visita;
 
-use App\Exception\Visita\VisitaNotFoundException;
 use App\Models\VisitaModel;
 
 final class VisitaDeleterService
 {
     private VisitaModel $visitaModel;
+    private VisitaFinderService $visitaFinderService;
 
     public function __construct()
     {
-        $this->visitaModel = new VisitaModel();
+        $this->visitaModel         = new VisitaModel();
+        $this->visitaFinderService = new VisitaFinderService();
     }
 
     public function eliminar(int $id): void
     {
-        if ($this->visitaModel->find($id) === null) {
-            throw new VisitaNotFoundException($id);
-        }
-
-        $this->visitaModel->update($id, ['estado' => 0]);
+        $visita = $this->visitaFinderService->find($id);
+        $this->visitaModel->delete($visita->getId());
     }
 }
