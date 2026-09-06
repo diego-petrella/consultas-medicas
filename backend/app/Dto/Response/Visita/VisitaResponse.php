@@ -7,6 +7,7 @@ final readonly class VisitaResponse
     public function __construct(
         public int $id,
         public string $fecha,
+        public int $pacienteId,
         public string $pacienteDni,
         public string $pacienteNombre,
         public string $pacienteApellido,

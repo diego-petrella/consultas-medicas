@@ -11,6 +11,7 @@ final class PrimitiveToVisitaResponseConverter
         return new VisitaResponse(
             id: (int) $primitive->id,
             fecha: $primitive->fecha,
+            pacienteId: (int) $primitive->paciente_id,
             pacienteDni: $primitive->paciente_dni,
             pacienteNombre: $primitive->paciente_nombre,
             pacienteApellido: $primitive->paciente_apellido,
