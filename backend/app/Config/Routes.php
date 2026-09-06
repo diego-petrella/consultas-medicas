@@ -19,9 +19,6 @@ $routes->post('logout', 'User\UserLogoutController::logout');
 $routes->post('historias-clinicas', 'HistoriaClinica\HistoriaClinicaPostController::create');
 $routes->get('historias-clinicas/(:num)/pdf', 'HistoriaClinica\HistoriaClinicaPdfController::pdf/$1');
 
-//Rutas para roles
+//Rutas para roles (solo lectura -- son constantes del sistema, no se crean/editan por API)
 $routes->get('roles', 'Role\RolesGetController::search');
 $routes->get('roles/(:num)', 'Role\RoleGetController::find/$1');
-$routes->post('roles', 'Role\RolePostController::create');
-$routes->put('roles/(:num)', 'Role\RolePutController::put/$1');
-$routes->delete('roles/(:num)', 'Role\RoleDeleteController::do/$1');

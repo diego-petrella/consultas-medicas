@@ -57,29 +57,4 @@ final class RoleModel
 
         return $entities;
     }
-
-    public function insert(Role $role): Role
-    {
-        $this->db->query(
-            'INSERT INTO roles (nombre) VALUES (?)',
-            [$role->getNombre()]
-        );
-
-        return $this->find($this->db->insertID());
-    }
-
-    public function update(Role $role): Role
-    {
-        $this->db->query(
-            'UPDATE roles SET nombre = ? WHERE id = ?',
-            [$role->getNombre(), $role->getId()]
-        );
-
-        return $role;
-    }
-
-    public function delete(int $id): void
-    {
-        $this->db->query('DELETE FROM roles WHERE id = ?', [$id]);
-    }
 }
