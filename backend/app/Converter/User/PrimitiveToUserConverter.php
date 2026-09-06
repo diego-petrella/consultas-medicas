@@ -15,6 +15,7 @@ final class PrimitiveToUserConverter
             $primitive->nombre,
             $primitive->apellido,
             (int) $primitive->role_id,
+            (int) $primitive->activo,
             $primitive->created_at,
         );
     }

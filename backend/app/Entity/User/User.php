@@ -11,6 +11,7 @@ final class User
         private string $nombre,
         private string $apellido,
         private int $roleId,
+        private int $activo,
         private ?string $createdAt,
     ) {}
 
@@ -47,6 +48,11 @@ final class User
     public function getRoleId(): int
     {
         return $this->roleId;
+    }
+
+    public function getActivo(): int
+    {
+        return $this->activo;
     }
 
     public function getCreatedAt(): ?string

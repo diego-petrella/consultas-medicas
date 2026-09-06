@@ -21,6 +21,12 @@ $routes->delete('obras-sociales/(:num)', 'ObraSocial\ObraSocialDeleteController:
 $routes->post('login', 'User\UserPostController::login');
 $routes->post('logout', 'User\UserLogoutController::logout');
 
+//Rutas para usuarios (protegidas: sin sesion -> 401, y solo Administrativo puede crear/editar/borrar)
+$routes->get('users', 'User\UserGetController::find', ['filter' => 'auth']);
+$routes->post('users', 'User\UserPostController::create', ['filter' => 'auth:1']);
+$routes->put('users/(:num)', 'User\UserPutController::put/$1', ['filter' => 'auth:1']);
+$routes->delete('users/(:num)', 'User\UserDeleteController::do/$1', ['filter' => 'auth:1']);
+
 //Rutas para historias clinicas
 $routes->post('historias-clinicas', 'HistoriaClinica\HistoriaClinicaPostController::create');
 $routes->get('historias-clinicas/(:num)/pdf', 'HistoriaClinica\HistoriaClinicaPdfController::pdf/$1');
