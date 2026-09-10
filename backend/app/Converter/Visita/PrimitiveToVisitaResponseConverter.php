@@ -15,8 +15,10 @@ final class PrimitiveToVisitaResponseConverter
             pacienteDni: $primitive->paciente_dni,
             pacienteNombre: $primitive->paciente_nombre,
             pacienteApellido: $primitive->paciente_apellido,
+            doctorId: (int) $primitive->doctor_id,
             doctorNombre: $primitive->doctor_nombre,
             doctorApellido: $primitive->doctor_apellido,
+            obraSocialId: $primitive->obra_social_id !== null ? (int) $primitive->obra_social_id : null,
             obraSocialNombre: $primitive->obra_social_nombre,
             estado: (int) $primitive->estado,
         );

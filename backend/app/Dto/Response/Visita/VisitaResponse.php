@@ -11,8 +11,10 @@ final readonly class VisitaResponse
         public string $pacienteDni,
         public string $pacienteNombre,
         public string $pacienteApellido,
+        public int $doctorId,
         public string $doctorNombre,
         public string $doctorApellido,
+        public ?int $obraSocialId,
         public ?string $obraSocialNombre,
         public int $estado,
     ) {}
