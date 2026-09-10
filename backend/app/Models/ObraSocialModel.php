@@ -31,6 +31,18 @@ final class ObraSocialModel
         return $this->converter->convert($primitive);
     }
 
+    public function buscarPorNombre(string $nombre): ?ObraSocial
+    {
+        $result    = $this->db->query('SELECT * FROM obras_sociales WHERE nombre = ?', [$nombre]);
+        $primitive = $result->getRow();
+
+        if (is_null($primitive)) {
+            return null;
+        }
+
+        return $this->converter->convert($primitive);
+    }
+
     public function search(ObraSocialFilterRequest $request): array
     {
         $parameters = [];
