@@ -46,6 +46,8 @@ $routes->put('pacientes/(:num)', 'Paciente\PacientePutController::put/$1', ['fil
 $routes->delete('pacientes/(:num)', 'Paciente\PacienteDeleteController::do/$1', ['filter' => 'auth:1']);
 
 //Rutas para visitas
+//'mias' va antes que la ruta general por (:num) para no chocar con ella
+$routes->get('visitas/mias', 'Visita\VisitaGetController::mias', ['filter' => 'auth:2']);
 $routes->get('visitas', 'Visita\VisitaGetController::search', ['filter' => 'auth:1']);
 $routes->get('visitas/(:num)', 'Visita\VisitaShowController::show/$1', ['filter' => 'auth:1']);
 $routes->get('visitas/(:num)/log', 'Visita\VisitaLogController::log/$1', ['filter' => 'auth:1']);

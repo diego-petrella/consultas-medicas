@@ -79,6 +79,11 @@ final class VisitaModel
             $parameters[] = $filtros['obra_social_id'];
         }
 
+        if (! empty($filtros['doctor_id'])) {
+            $query .= 'AND visitas.doctor_id = ? ';
+            $parameters[] = $filtros['doctor_id'];
+        }
+
         $query .= 'ORDER BY visitas.fecha DESC';
 
         $result     = $this->db->query($query, $parameters);
