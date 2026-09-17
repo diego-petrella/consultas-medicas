@@ -39,8 +39,11 @@ $routes->get('roles/(:num)', 'Role\RoleGetController::find/$1', ['filter' => 'au
 //'buscar' va antes de las rutas con (:num) para que CodeIgniter no la confunda con un id numerico
 $routes->get('pacientes/buscar', 'Paciente\PacienteBuscarController::buscar', ['filter' => 'auth']);
 $routes->get('pacientes/(:num)/historial', 'Paciente\PacienteHistorialController::historial/$1', ['filter' => 'auth']);
+$routes->get('pacientes/(:num)/historial/pdf', 'Paciente\PacienteHistorialPdfController::pdf/$1', ['filter' => 'auth']);
+$routes->get('pacientes', 'Paciente\PacienteGetController::index', ['filter' => 'auth']);
 $routes->post('pacientes', 'Paciente\PacientePostController::create', ['filter' => 'auth']);
 $routes->put('pacientes/(:num)', 'Paciente\PacientePutController::put/$1', ['filter' => 'auth']);
+$routes->delete('pacientes/(:num)', 'Paciente\PacienteDeleteController::do/$1', ['filter' => 'auth:1']);
 
 //Rutas para visitas
 $routes->get('visitas', 'Visita\VisitaGetController::search', ['filter' => 'auth:1']);
