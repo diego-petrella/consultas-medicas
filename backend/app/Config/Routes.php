@@ -39,12 +39,18 @@ $routes->get('roles/(:num)', 'Role\RoleGetController::find/$1', ['filter' => 'au
 //'buscar' va antes de las rutas con (:num) para que CodeIgniter no la confunda con un id numerico
 $routes->get('pacientes/buscar', 'Paciente\PacienteBuscarController::buscar', ['filter' => 'auth']);
 $routes->get('pacientes/(:num)/historial', 'Paciente\PacienteHistorialController::historial/$1', ['filter' => 'auth']);
+$routes->get('pacientes/(:num)/historial/pdf', 'Paciente\PacienteHistorialPdfController::pdf/$1', ['filter' => 'auth']);
+$routes->get('pacientes', 'Paciente\PacienteGetController::index', ['filter' => 'auth']);
 $routes->post('pacientes', 'Paciente\PacientePostController::create', ['filter' => 'auth']);
 $routes->put('pacientes/(:num)', 'Paciente\PacientePutController::put/$1', ['filter' => 'auth']);
+$routes->delete('pacientes/(:num)', 'Paciente\PacienteDeleteController::do/$1', ['filter' => 'auth:1']);
 
 //Rutas para visitas
+//'mias' va antes que la ruta general por (:num) para no chocar con ella
+$routes->get('visitas/mias', 'Visita\VisitaGetController::mias', ['filter' => 'auth:2']);
 $routes->get('visitas', 'Visita\VisitaGetController::search', ['filter' => 'auth:1']);
 $routes->get('visitas/(:num)', 'Visita\VisitaShowController::show/$1', ['filter' => 'auth:1']);
+$routes->get('visitas/(:num)/log', 'Visita\VisitaLogController::log/$1', ['filter' => 'auth:1']);
 $routes->post('visitas', 'Visita\VisitaPostController::create', ['filter' => 'auth:1']);
 $routes->put('visitas/(:num)', 'Visita\VisitaPutController::put/$1', ['filter' => 'auth:1']);
 $routes->delete('visitas/(:num)', 'Visita\VisitaDeleteController::delete/$1', ['filter' => 'auth:1']);

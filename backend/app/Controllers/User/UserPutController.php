@@ -4,6 +4,7 @@ namespace App\Controllers\User;
 
 use App\Controllers\BaseController;
 use App\Services\Role\RoleService;
+use App\Services\User\PasswordPolicyService;
 use App\Services\User\UserUpdaterService;
 
 class UserPutController extends BaseController
@@ -18,6 +19,12 @@ class UserPutController extends BaseController
         if (! empty($faltantes)) {
             return $this->response->setStatusCode(422)->setJSON([
                 'error' => 'Faltan campos requeridos: ' . implode(', ', $faltantes),
+            ]);
+        }
+
+        if (! empty($data['password']) && ! PasswordPolicyService::esValida($data['password'])) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'error' => 'La contraseña debe tener al menos 8 caracteres',
             ]);
         }
 

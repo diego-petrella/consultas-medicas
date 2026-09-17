@@ -79,6 +79,11 @@ final class VisitaModel
             $parameters[] = $filtros['obra_social_id'];
         }
 
+        if (! empty($filtros['doctor_id'])) {
+            $query .= 'AND visitas.doctor_id = ? ';
+            $parameters[] = $filtros['doctor_id'];
+        }
+
         $query .= 'ORDER BY visitas.fecha DESC';
 
         $result     = $this->db->query($query, $parameters);
@@ -126,5 +131,20 @@ final class VisitaModel
     public function delete(int $id): void
     {
         $this->db->query('UPDATE visitas SET estado = 0 WHERE id = ?', [$id]);
+    }
+
+    public function existeSuperposicion(int $doctorId, string $fecha, ?int $excluirVisitaId = null): bool
+    {
+        $query      = 'SELECT visitas.id FROM visitas WHERE visitas.estado = 1 AND visitas.doctor_id = ? AND visitas.fecha = ? ';
+        $parameters = [$doctorId, $fecha];
+
+        if ($excluirVisitaId !== null) {
+            $query .= 'AND visitas.id != ? ';
+            $parameters[] = $excluirVisitaId;
+        }
+
+        $result = $this->db->query($query, $parameters);
+
+        return $result->getRow() !== null;
     }
 }

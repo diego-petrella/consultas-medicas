@@ -36,6 +36,10 @@ final class UserFinderService
             throw new Exception('Usuario o contraseña incorrectos.');
         }
 
+        if ($user->getActivo() !== 1) {
+            throw new Exception('Usuario o contraseña incorrectos.');
+        }
+
         $rol = Database::connect()
             ->query('SELECT nombre FROM roles WHERE id = ?', [$user->getRoleId()])
             ->getRow();
