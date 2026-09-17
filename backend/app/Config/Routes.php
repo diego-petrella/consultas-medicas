@@ -48,6 +48,7 @@ $routes->delete('pacientes/(:num)', 'Paciente\PacienteDeleteController::do/$1', 
 //Rutas para visitas
 $routes->get('visitas', 'Visita\VisitaGetController::search', ['filter' => 'auth:1']);
 $routes->get('visitas/(:num)', 'Visita\VisitaShowController::show/$1', ['filter' => 'auth:1']);
+$routes->get('visitas/(:num)/log', 'Visita\VisitaLogController::log/$1', ['filter' => 'auth:1']);
 $routes->post('visitas', 'Visita\VisitaPostController::create', ['filter' => 'auth:1']);
 $routes->put('visitas/(:num)', 'Visita\VisitaPutController::put/$1', ['filter' => 'auth:1']);
 $routes->delete('visitas/(:num)', 'Visita\VisitaDeleteController::delete/$1', ['filter' => 'auth:1']);
