@@ -30,10 +30,9 @@ final class StatsController extends BaseController
         return $this->response->setJSON($data);
     }
 
-    // TODO: filtrar por pacientes.activo = 1 cuando esa columna exista en pacientes.
     private function totalPacientesActivos(): int
     {
-        $result = $this->db->query('SELECT COUNT(*) as total FROM pacientes');
+        $result = $this->db->query('SELECT COUNT(*) as total FROM pacientes WHERE activo = 1');
 
         return (int) $result->getRow()->total;
     }
