@@ -21,10 +21,11 @@ final class PacienteUpdaterService
         }
 
         $this->pacienteModel->update($id, [
-            'nombre'         => $datos['nombre'],
-            'apellido'       => $datos['apellido'],
-            'telefono'       => $datos['telefono'] ?? null,
-            'obra_social_id' => $datos['obra_social_id'],
+            'nombre'           => $datos['nombre'],
+            'apellido'         => $datos['apellido'],
+            'fecha_nacimiento' => $datos['fecha_nacimiento'] ?? null,
+            'telefono'         => $datos['telefono'] ?? null,
+            'obra_social_id'   => $datos['obra_social_id'],
         ]);
     }
 }

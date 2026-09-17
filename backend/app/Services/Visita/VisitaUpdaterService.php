@@ -3,6 +3,7 @@
 namespace App\Services\Visita;
 
 use App\Entity\Visita\Visita;
+use App\Exception\Visita\VisitaSuperpuestaException;
 use App\Models\VisitaLogModel;
 use App\Models\VisitaModel;
 
@@ -23,11 +24,17 @@ final class VisitaUpdaterService
     {
         $visita = $this->visitaFinderService->find($id);
 
+        $doctorId = (int) $datos['doctor_id'];
+
+        if ($this->visitaModel->existeSuperposicion($doctorId, $datos['fecha'], $id)) {
+            throw new VisitaSuperpuestaException();
+        }
+
         $actualizada = new Visita(
             id: $visita->getId(),
             fecha: $datos['fecha'],
             pacienteId: $visita->getPacienteId(),
-            doctorId: (int) $datos['doctor_id'],
+            doctorId: $doctorId,
             obraSocialId: isset($datos['obra_social_id']) ? (int) $datos['obra_social_id'] : null,
             estado: $visita->getEstado(),
         );
