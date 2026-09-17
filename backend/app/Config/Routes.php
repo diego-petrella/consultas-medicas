@@ -56,3 +56,6 @@ $routes->get('doctores', 'Doctor\DoctorGetController::index', ['filter' => 'auth
 $routes->post('doctores', 'Doctor\DoctorPostController::create', ['filter' => 'auth:1']);
 $routes->put('doctores/(:num)', 'Doctor\DoctorPutController::put/$1', ['filter' => 'auth:1']);
 $routes->delete('doctores/(:num)', 'Doctor\DoctorDeleteController::delete/$1', ['filter' => 'auth:1']);
+
+//Rutas para estadisticas
+$routes->get('stats/dashboard', 'Stats\StatsController::dashboard', ['filter' => 'auth:1']);
