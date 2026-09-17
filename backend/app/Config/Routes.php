@@ -43,6 +43,8 @@ $routes->post('pacientes', 'Paciente\PacientePostController::create', ['filter' 
 $routes->put('pacientes/(:num)', 'Paciente\PacientePutController::put/$1', ['filter' => 'auth']);
 
 //Rutas para visitas
+//'mias' va antes que la ruta general por (:num) para no chocar con ella
+$routes->get('visitas/mias', 'Visita\VisitaGetController::mias', ['filter' => 'auth:2']);
 $routes->get('visitas', 'Visita\VisitaGetController::search', ['filter' => 'auth:1']);
 $routes->get('visitas/(:num)', 'Visita\VisitaShowController::show/$1', ['filter' => 'auth:1']);
 $routes->post('visitas', 'Visita\VisitaPostController::create', ['filter' => 'auth:1']);
