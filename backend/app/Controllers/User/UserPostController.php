@@ -5,6 +5,7 @@ namespace App\Controllers\User;
 use App\Controllers\BaseController;
 use App\Models\UserModel;
 use App\Services\Role\RoleService;
+use App\Services\User\PasswordPolicyService;
 use App\Services\User\UserCreatorService;
 use App\Services\User\UserFinderService;
 use Exception;
@@ -21,6 +22,12 @@ class UserPostController extends BaseController
         if (! empty($faltantes)) {
             return $this->response->setStatusCode(422)->setJSON([
                 'error' => 'Faltan campos requeridos: ' . implode(', ', $faltantes),
+            ]);
+        }
+
+        if (! PasswordPolicyService::esValida($data['password'])) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'error' => 'La contraseña debe tener al menos 8 caracteres',
             ]);
         }
 
@@ -54,6 +61,12 @@ class UserPostController extends BaseController
         if (!$username || !$password) {
             return $this->response->setStatusCode(422)->setJSON([
                 'error' => 'Faltan campos requeridos: username y password',
+            ]);
+        }
+
+        if (! service('throttler')->check('login_' . $username, 5, 60)) {
+            return $this->response->setStatusCode(429)->setJSON([
+                'error' => 'Demasiados intentos, esperá un momento.',
             ]);
         }
 

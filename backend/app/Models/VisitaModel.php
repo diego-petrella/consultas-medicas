@@ -132,4 +132,19 @@ final class VisitaModel
     {
         $this->db->query('UPDATE visitas SET estado = 0 WHERE id = ?', [$id]);
     }
+
+    public function existeSuperposicion(int $doctorId, string $fecha, ?int $excluirVisitaId = null): bool
+    {
+        $query      = 'SELECT visitas.id FROM visitas WHERE visitas.estado = 1 AND visitas.doctor_id = ? AND visitas.fecha = ? ';
+        $parameters = [$doctorId, $fecha];
+
+        if ($excluirVisitaId !== null) {
+            $query .= 'AND visitas.id != ? ';
+            $parameters[] = $excluirVisitaId;
+        }
+
+        $result = $this->db->query($query, $parameters);
+
+        return $result->getRow() !== null;
+    }
 }

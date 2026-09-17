@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\DoctorModel;
 use App\Models\UserModel;
 use App\Services\Doctor\DoctorCreatorService;
+use App\Services\User\PasswordPolicyService;
 
 class DoctorPostController extends BaseController
 {
@@ -19,6 +20,12 @@ class DoctorPostController extends BaseController
         if (! empty($faltantes)) {
             return $this->response->setStatusCode(422)->setJSON([
                 'error' => 'Faltan campos requeridos: ' . implode(', ', $faltantes),
+            ]);
+        }
+
+        if (! PasswordPolicyService::esValida($data['password'])) {
+            return $this->response->setStatusCode(422)->setJSON([
+                'error' => 'La contraseña debe tener al menos 8 caracteres',
             ]);
         }
 

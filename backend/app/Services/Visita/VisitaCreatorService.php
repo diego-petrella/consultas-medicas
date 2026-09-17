@@ -3,6 +3,7 @@
 namespace App\Services\Visita;
 
 use App\Entity\Visita\Visita;
+use App\Exception\Visita\VisitaSuperpuestaException;
 use App\Models\PacienteModel;
 use App\Models\VisitaModel;
 use Config\Database;
@@ -43,11 +44,18 @@ final class VisitaCreatorService
             ]);
         }
 
+        $doctorId = (int) $data['doctor_id'];
+
+        if ($this->visitaModel->existeSuperposicion($doctorId, $data['fecha'])) {
+            $db->transRollback();
+            throw new VisitaSuperpuestaException();
+        }
+
         $visita = new Visita(
             id: null,
             fecha: $data['fecha'],
             pacienteId: (int) $pacienteId,
-            doctorId: (int) $data['doctor_id'],
+            doctorId: $doctorId,
             obraSocialId: isset($data['obra_social_id']) ? (int) $data['obra_social_id'] : null,
             estado: 1,
         );

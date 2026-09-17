@@ -9,8 +9,10 @@ class VisitaDeleteController extends BaseController
 {
     public function delete(int $id)
     {
+        $usuario = session()->get('usuario');
+
         $service = new VisitaDeleterService();
-        $service->eliminar($id);
+        $service->eliminar($id, $usuario['id']);
 
         return $this->response->setStatusCode(200)->setJSON(['id' => $id]);
     }
