@@ -9,10 +9,11 @@ class VisitaPutController extends BaseController
 {
     public function put(int $id)
     {
-        $data = $this->request->getJSON(true);
+        $data    = $this->request->getJSON(true);
+        $usuario = session()->get('usuario');
 
         $service = new VisitaUpdaterService();
-        $service->actualizar($id, $data);
+        $service->actualizar($id, $data, $usuario['id']);
 
         return $this->response->setStatusCode(200)->setJSON(['id' => $id]);
     }
