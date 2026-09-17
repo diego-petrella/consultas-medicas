@@ -55,8 +55,8 @@ final class StatsController extends BaseController
             "SELECT DATE_FORMAT(fecha, '%Y-%m') as mes, COUNT(*) as cantidad
              FROM visitas
              WHERE estado = 1
-             GROUP BY YEAR(fecha), MONTH(fecha)
-             ORDER BY YEAR(fecha) DESC, MONTH(fecha) DESC
+             GROUP BY DATE_FORMAT(fecha, '%Y-%m')
+             ORDER BY mes DESC
              LIMIT 6"
         );
 
